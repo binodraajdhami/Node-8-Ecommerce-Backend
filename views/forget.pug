@@ -1,0 +1,16 @@
+html
+    head
+        title Forget Passord  Page
+    body
+        h1 Reset Password Form
+
+        form(action='', method='post')
+            label Email
+            br
+            input(type='email', placeholder='Enter Email', id='email', name='email')
+            br
+            br
+            input(type='submit', value='Reset Password')
+
+        h4 Back to login 
+            a(href='/') Login

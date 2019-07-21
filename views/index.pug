@@ -1,0 +1,23 @@
+html
+    head
+        title Login page
+    body
+        h1 Login Form
+
+        form(method='post', action='/login')
+            label Username
+            br
+            input(type='text', placeholder='Enter Username', id='username', name='username')
+            br
+            br
+            label Password
+            br
+            input(type='password', placeholder='Enter Password', id='password', name='password')
+            br
+            br
+            input(type='submit', value='Login')
+        
+        h4 Dont't have an account? 
+            a(href='/register') Sign Up
+        h4 Forget password? 
+            a(href='/forget') Reset Password
