@@ -6,6 +6,7 @@ require('./db');
 // Imports Route Files
 var indexRoute = require('./controller/index')();
 var authRoute = require('./controller/auth')();
+var productRoute = require('./controller/product')();
 
 // Imports Middewares
 var morgan = require('morgan');
@@ -29,10 +30,8 @@ app.use(bodyParser.json());
 app.use('/', authRoute);
 // app.use('/img', express.static('uploads/images'));
 app.use('/img', express.static(path.join(__dirname, 'uploads/images')));
-app.use('/home', authorize, indexRoute);
-app.use('/auth', authenticate, authorize, authRoute);
-app.use('/user', authenticate, authorize, authRoute);
-app.use('/product', authenticate, authorize, authRoute);
+app.use('/home', indexRoute);
+app.use('/product', authenticate, productRoute);
 
 app.use(function(req, res, next) {
     next({

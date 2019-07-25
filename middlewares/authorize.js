@@ -1,10 +1,11 @@
-module.exports = function(req, res, next){
-    // if(req.headers.access == 'admin'){
-    //     return next();
-    // } else{
-    //     return res.json({
-    //         msg: 'Your are not authorize'
-    //     });
-    // }
-    next();
+module.exports = function(req, res, next) {
+
+    if (req.loggedInUser.role == 2) {
+        return next();
+    } else {
+        res.json({
+            msg: 'Your dont have access'
+        });
+    }
+
 }

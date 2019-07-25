@@ -1,5 +1,6 @@
 module.exports.app = {
-    port: 4200
+    port: 4200,
+    jwtSecret: 'jt89hr9w8(U((r0rojojfj34iiw(*&^$'
 }
 
 module.exports.mongodb = {

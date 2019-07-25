@@ -21,7 +21,13 @@ var userSchema = new Schema({
     address: {
         perAddress: String,
         temAddress: String
+    },
+    role: {
+        type: Number, // 1 Main Admin || 2 Normal User
+        default: 2
     }
+}, {
+    timestamps: true
 });
 
 var UserModel = mongoose.model('user', userSchema);
