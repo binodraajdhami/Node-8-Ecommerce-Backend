@@ -1,7 +1,14 @@
 var mongoose = require('mongoose');
 var config = require('./config');
 
-mongoose.connect(config.mongodb.dbUrl, function(err, done) {
+var dbUrl;
+if (process.env.ENVIRONMENT == 'prod') {
+    dbUrl = config.mongodb.mlabdbUrl;
+} else {
+    dbUrl = config.mongodb.localdbUrl
+}
+
+mongoose.connect(dbUrl, function(err, done) {
     if (err) {
         console.log('Database connection error');
     } else {

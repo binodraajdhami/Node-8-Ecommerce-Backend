@@ -6,7 +6,10 @@ require('./db');
 // Imports Route Files
 var indexRoute = require('./controller/index')();
 var authRoute = require('./controller/auth')();
-var productRoute = require('./controller/product')();
+// var productRoute = require('./controller/product')();
+
+// load API
+var apiRoutes = require('./controller/api.routes');
 
 // Imports Middewares
 var morgan = require('morgan');
@@ -31,7 +34,8 @@ app.use('/', authRoute);
 // app.use('/img', express.static('uploads/images'));
 app.use('/img', express.static(path.join(__dirname, 'uploads/images')));
 app.use('/home', indexRoute);
-app.use('/product', authenticate, productRoute);
+// app.use('/product', authenticate, productRoute);
+app.use('/api', apiRoutes);
 
 app.use(function(req, res, next) {
     next({

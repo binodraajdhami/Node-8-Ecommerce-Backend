@@ -4,5 +4,6 @@ module.exports.app = {
 }
 
 module.exports.mongodb = {
-    dbUrl: 'mongodb://127.0.0.1:27017/dbbackendone'
+    localdbUrl: 'mongodb://127.0.0.1:27017/dbbackendone',
+    mlabdbUrl: 'mongodb://admin1:admin1@ds137759.mlab.com:37759/myexpressdb'
 }
