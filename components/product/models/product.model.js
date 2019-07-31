@@ -53,5 +53,5 @@ var productSchema = new Schema({
     timestamps: true
 });
 
-var ProductModel = mongoose.model('eproduct', productSchema);
+var ProductModel = mongoose.model('product', productSchema);
 module.exports = ProductModel;

@@ -46,35 +46,72 @@ function mapProductRequest(product, productDetails) {
     return product;
 }
 
-function find(condition, cb) {
-    ProductModel.find(condition).exec(function(err, product) {
-        if (err) {
-            return cb(err)
-        }
-        cb(product)
+function post(data) {
+    return new Promise(function(resolve, reject) {
+        var newProduct = new ProductModel({});
+        var mappedProduct = mapProductRequest(newProduct, data);
+        mappedProduct.save()
+            .then(function(data) {
+                console.log('data');
+                resolve(data);
+            })
+            .catch(function(err) {
+                reject(err);
+            });
     });
 }
 
-function post(cb) {
-    var image = req.file.mimetype.split('/')[0];
-    if (image !== 'image') {
-        return res.json({
-            msg: 'Please select valid image format'
+function find(condition) {
+    return new Promise(function(resolve, reject) {
+        ProductModel.find(condition).exec(function(err, products) {
+            if (err) {
+                reject(err);
+            }
+            resolve(products);
         });
-    }
-    req.body.user = req.loggedInUser._id;
-    req.body.image = req.file.filename;
-    var newProduct = new ProductModel({});
-    var insertNewProduct = mapProductRequest(newProduct, req.body)
-    insertNewProduct.save(function(err, product) {
-        if (err) {
-            return next(err);
-        }
-        res.status(200).json(product);
+    });
+}
+
+function update(id, data) {
+    return new Promise(function(resolve, reject) {
+        ProductModel.findById(id).exec(function(err, product) {
+            if (err) {
+                reject(err);
+            } else {
+                if (product) {
+                    var updateProduct = mapProductRequest(product, data);
+                    updateProduct.save(function(err, saved) {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(saved);
+                        }
+                    });
+
+                } else {
+                    reject({
+                        msg: 'product not found'
+                    })
+                }
+            }
+        });
+    });
+}
+
+function deleteProduct(id) {
+    return new Promise(function(resolve, reject) {
+        ProductModel.findByIdAndRemove(id).exec(function(err, done) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(done);
+        });
     });
 }
 
 module.exports = {
     find: find,
-    post: post
+    post: post,
+    delete: deleteProduct,
+    update: update
 }

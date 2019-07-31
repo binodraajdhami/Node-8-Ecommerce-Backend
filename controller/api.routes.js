@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var productRoute = require('./../components/product/routes/product.router');
+var authenticate = require('./../middlewares/authenticate');
+var productRoute = require('./../components/product/routes/product.route')();
 
-router.use('/product', productRoute);
+router.use('/product', authenticate, productRoute);
 
 module.exports = router;

@@ -66,9 +66,9 @@ module.exports = function() {
     router.route('/')
         .get(function(req, res, next) {
             var condtion = {};
-            if (req.loggedInUser.role != 1) {
-                condtion.user = req.loggedInUser._id;
-            }
+            // if (req.loggedInUser.role != 2) {
+            //     condtion.user = req.loggedInUser._id;
+            // }
             ProductModel.find(condtion)
                 .populate('user', { username: 1 })
                 .exec(function(err, products) {
